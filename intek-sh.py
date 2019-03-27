@@ -35,21 +35,24 @@ def main():
     This is the core of the program, get in put and execute.
     """
     while True:
-        orchestra = input("intek-sh$ ")
-        if orchestra == "":
-            continue
-        command = ""
-        arguments = ""
         try:
-            separation = orchestra.index(" ")
-            command = orchestra[:separation]
-            arguments = orchestra.replace(orchestra[:(separation + 1)], "").\
-                split(" ")
-        except ValueError:
-            command = orchestra
-        result, status = run_command(command, arguments)
-        if result == "exit":
-            return status
+            orchestra = input("intek-sh$ ")
+            if orchestra == "":
+                continue
+            command = ""
+            arguments = ""
+            try:
+                separation = orchestra.index(" ")
+                command = orchestra[:separation]
+                arguments = orchestra.replace(orchestra[:(separation + 1)], "").\
+                    split(" ")
+            except ValueError:
+                command = orchestra
+            result, status = run_command(command, arguments)
+            if result == "exit":
+                return status
+        except EOFError:
+            break
 
 
 if __name__ == "__main__":
