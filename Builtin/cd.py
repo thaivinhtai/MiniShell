@@ -11,9 +11,13 @@ def change_dir(directory):
     If the directory is existed, change to directory. If it not exists, print
     error message.
     """
-    if get_file_type(directory) == "directory":
-        return chdir(get_full_path(directory))
-    if get_file_type(directory) is None:
-        return print("intek-sh: cd:", directory + ": No such file or",
+    while "" in directory:
+        directory.remove("")
+    if not directory:
+        directory.append("~")
+    if get_file_type(directory[0]) == "directory":
+        return chdir(get_full_path(directory[0]))
+    if get_file_type(directory[0]) is None:
+        return print("intek-sh: cd:", directory[0] + ": No such file or",
                      "directory")
-    return print("intek-sh: cd:", directory + ": Not a directory")
+    return print("intek-sh: cd:", directory[0] + ": Not a directory"), 0

@@ -3,3 +3,4 @@
 from .execute_program import execute_program
 from .cd import change_dir
 from .exit import exit_intek_shell
+from .printenv import print_env

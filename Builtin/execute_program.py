@@ -15,22 +15,25 @@ def execute_program(name_of_program, arguments):
         name_of_program     -- name of program need to be called.
         arguments           -- arguments of the program.
     """
-    if name_of_program is None:
-        return "exit"
+    arguments = list(arguments)
+    while "" in arguments:
+        arguments.remove("")
     environ_path = get_path_environ()
     path_program = ""
     try:
         # if there is a specified file, run it
+        if get_file_type(name_of_program) == "file" and arguments != "":
+            return run([name_of_program] + arguments), 0
         if get_file_type(name_of_program) == "file":
-            return run([name_of_program, arguments]) if arguments != ""\
-                    else run([name_of_program])
+            return run([name_of_program]), 0
         # if not a specified file, search all the path environment
         for element in environ_path:
             path_program = element + "/" + name_of_program
+            if get_file_type(path_program) == "file" and arguments != "":
+                return run([path_program] + arguments), 0
             if get_file_type(path_program) == "file":
-                return run([path_program, arguments]) if arguments != ""\
-                        else run([path_program])
+                return run([path_program]), 0
 
-        return print("intek-sh:", name_of_program + ": command not found")
+        return print("intek-sh:", name_of_program + ": command not found"), 127
     except PermissionError:
-        return print("intek-sh:", name_of_program + ": Permission denied")
+        return print("intek-sh:", name_of_program + ": Permission denied"), 126

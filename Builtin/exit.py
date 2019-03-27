@@ -8,14 +8,18 @@ def exit_intek_shell(argument):
     Optional argument:
         -   argument    --  exit status.
     """
-    if argument == "":
+    argument = list(argument)
+    while "" in argument:
+        argument.remove("")
+    if not argument:
         print("exit")
-        return "exit"
+        return "exit", 0
     try:
-        int(argument)
+        int(argument[0])
         print("exit")
-        return "exit"
+        return "exit", argument[0]
     except ValueError:
         print("exit")
-        print("intek-sh: exit:", str(argument) + ": numeric argument required")
-        return "exit"
+        print("intek-sh: exit:", str(argument[0]) +
+              ": numeric argument required")
+        return "exit", 2

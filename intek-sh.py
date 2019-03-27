@@ -2,7 +2,8 @@
 
 """This program is called The Mini-shell, that simulates the Bash Shell."""
 
-from Builtin import execute_program, change_dir, exit_intek_shell
+from Builtin import (execute_program, change_dir, exit_intek_shell,
+                     print_env)
 
 
 def run_command(command, arguments):
@@ -17,7 +18,8 @@ def run_command(command, arguments):
     """
     switcher = {
         'cd': change_dir,
-        'exit': exit_intek_shell
+        'exit': exit_intek_shell,
+        'printenv': print_env
     }
     try:
         func = switcher.get(command)
@@ -27,20 +29,25 @@ def run_command(command, arguments):
 
 
 def main():
+    """
+    This is the core of the program, get in put and execute.
+    """
     while True:
         orchestra = input("intek-sh$ ")
+        if orchestra == "":
+            continue
         command = ""
         arguments = ""
         try:
             separation = orchestra.index(" ")
             command = orchestra[:separation]
-            arguments = orchestra.replace(orchestra[:(separation + 1)], "")
+            arguments = orchestra.replace(orchestra[:(separation + 1)], "").\
+                split(" ")
         except ValueError:
             command = orchestra
-        result = run_command(command, arguments)
+        result, status = run_command(command, arguments)
         if result == "exit":
-            break
-    return 0
+            return status
 
 
 if __name__ == "__main__":
