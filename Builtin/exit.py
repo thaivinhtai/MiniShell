@@ -20,6 +20,5 @@ def exit_intek_shell(argument):
         return "exit", argument[0]
     except ValueError:
         print("exit")
-        print("intek-sh: exit:", str(argument[0]) +
-              ": numeric argument required")
+        print("intek-sh: exit:", str(argument[0]))
         return "exit", 2

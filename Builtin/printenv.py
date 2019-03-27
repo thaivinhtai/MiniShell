@@ -15,11 +15,16 @@ def print_env(variables):
     """
     variables = list(variables)
     if not variables:
-        
+        for var, value in environ.items():
+            print(var + ":", value)
+        return 0, 0
+
     result = []
     for element in variables:
         try:
             result.append(str(environ[element]))
         except KeyError:
             continue
-    return print(*result, sep='\n'), 0
+    if result:
+        return print(*result, sep='\n'), 0
+    return 0, 0
