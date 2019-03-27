@@ -15,7 +15,7 @@ def unset(arguments):
         arguments.remove("")
     if not arguments:
         return 0, 0
-    for element in argument:
+    for element in arguments:
         if element in environ:
             environ.pop(element)
     return 0, 0

@@ -1,7 +1,7 @@
 """This modules will run a program that the user type in."""
 
 from subprocess import run
-from .Stuffs import get_path_environ, get_file_type
+from .Stuffs import get_path_environ, get_file_type, get_full_path
 
 
 def execute_program(name_of_program, arguments):
@@ -23,9 +23,9 @@ def execute_program(name_of_program, arguments):
     try:
         # if there is a specified file, run it
         if get_file_type(name_of_program) == "file" and arguments != "":
-            return run([name_of_program] + arguments), 0
+            return run([get_full_path(name_of_program)] + arguments), 0
         if get_file_type(name_of_program) == "file":
-            return run([name_of_program]), 0
+            return run([get_full_path(name_of_program)]), 0
         # if not a specified file, search all the path environment
         for element in environ_path:
             path_program = element + "/" + name_of_program
