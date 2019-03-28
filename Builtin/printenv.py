@@ -16,7 +16,7 @@ def print_env(variables):
     variables = list(variables)
     if not variables:
         for var, value in environ.items():
-            print(var + "=", value)
+            print(var + "=" + value)
         return 0, 0
 
     result = []

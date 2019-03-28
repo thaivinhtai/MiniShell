@@ -13,6 +13,8 @@ def change_dir(directory):
     """
     if not directory:
         directory.append("~")
+    if directory[0] == "HOME":
+        directory[0] = "~"
     if get_file_type(get_full_path(directory[0])) == "directory":
         return chdir(get_full_path(directory[0])), 0
     if get_file_type(directory[0]) is None:

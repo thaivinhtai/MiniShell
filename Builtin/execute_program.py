@@ -19,9 +19,10 @@ def execute_program(name_of_program, arguments):
     path_program = ""
     try:
         # if there is a specified file, run it
-        if get_file_type(name_of_program) == "file" and arguments != "":
+        if get_file_type(name_of_program) == "file" and arguments != "" and\
+            "/" in name_of_program:
             return run([get_full_path(name_of_program)] + arguments), 0
-        if get_file_type(name_of_program) == "file":
+        if get_file_type(name_of_program) == "file" and "/" in name_of_program:
             return run([get_full_path(name_of_program)]), 0
         # if not a specified file, search all the path environment
         for element in environ_path:
