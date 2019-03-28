@@ -53,4 +53,7 @@ def get_path_environ():
 
     This Function splits all the value in the $PATH and return a list of path.
     """
-    return environ['PATH'].split(":")
+    try:
+        return environ['PATH'].split(":")
+    except KeyError:
+        return []

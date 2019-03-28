@@ -1,6 +1,6 @@
 """This module provides the ability to change the working directory."""
 
-from os import chdir
+from os import chdir, environ
 from .Stuffs import get_file_type, get_full_path
 
 
@@ -11,10 +11,13 @@ def change_dir(directory):
     If the directory is existed, change to directory. If it not exists, print
     error message.
     """
-    if not directory:
-        directory.append("~")
-    if directory[0] == "HOME":
-        directory[0] = "~"
+    try:
+        if not directory:
+            directory.append(environ['HOME'])
+        if directory[0] == "HOME":
+            directory[0] = environ['HOME']
+    except KeyError:
+        return print("intek-sh: cd: HOME not set")
     if get_file_type(get_full_path(directory[0])) == "directory":
         return chdir(get_full_path(directory[0])), 0
     if get_file_type(directory[0]) is None:
