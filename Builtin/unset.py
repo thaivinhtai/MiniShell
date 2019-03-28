@@ -11,8 +11,6 @@ def unset(arguments):
     Required argument:
         arguments   --  list of argument
     """
-    while "" in arguments:
-        arguments.remove("")
     if not arguments:
         return 0, 0
     for element in arguments:

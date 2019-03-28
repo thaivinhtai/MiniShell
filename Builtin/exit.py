@@ -9,8 +9,6 @@ def exit_intek_shell(argument):
         -   argument    --  exit status.
     """
     argument = list(argument)
-    while "" in argument:
-        argument.remove("")
     if not argument:
         print("exit")
         return "exit", 0

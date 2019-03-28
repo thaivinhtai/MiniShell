@@ -15,9 +15,6 @@ def execute_program(name_of_program, arguments):
         name_of_program     -- name of program need to be called.
         arguments           -- arguments of the program.
     """
-    arguments = list(arguments)
-    while "" in arguments:
-        arguments.remove("")
     environ_path = get_path_environ()
     path_program = ""
     try:

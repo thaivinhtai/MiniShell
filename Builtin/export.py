@@ -13,9 +13,6 @@ def export(arguments):
     Required argument:
         arguments   --  list of argument.
     """
-    # arguments = arguments.split(" ")
-    while "" in arguments:
-        arguments.remove("")
     if not arguments:
         for var, value in environ.items():
             print("declare -x", var + '="' + value + '""')

@@ -39,20 +39,16 @@ def main():
             orchestra = input("intek-sh$ ")
             if orchestra == "":
                 continue
-            command = ""
-            arguments = ""
-            try:
-                separation = orchestra.index(" ")
-                command = orchestra[:separation]
-                arguments = orchestra.replace(orchestra[:(separation + 1)], "").\
-                    split(" ")
-            except ValueError:
-                command = orchestra
+            orchestra = orchestra.split(" ")
+            while "" in orchestra:
+                orchestra.remove("")
+            command = orchestra[0]
+            arguments = orchestra[1:]
             result, status = run_command(command, arguments)
             if result == "exit":
                 return status
         except EOFError:
-            break
+            return 1
 
 
 if __name__ == "__main__":

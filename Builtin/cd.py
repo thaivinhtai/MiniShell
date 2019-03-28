@@ -11,9 +11,6 @@ def change_dir(directory):
     If the directory is existed, change to directory. If it not exists, print
     error message.
     """
-    directory = list(directory)
-    while "" in directory:
-        directory.remove("")
     if not directory:
         directory.append("~")
     if get_file_type(get_full_path(directory[0])) == "directory":
